@@ -1,0 +1,191 @@
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 35px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+h1 span:nth-child(1) {
+  color : #4285f4;
+}
+h1 span:nth-child(2) {
+  color : #ea4335;
+}
+h1 span:nth-child(3) {
+  color : #fbbc05;
+}
+h1 span:nth-child(4) {
+  color : #4285f4;
+}
+h1 span:nth-child(5) {
+  color : #34a853;
+}
+.align-center {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+select {
+    display: inline-block;
+    width:100px;
+    height:40px;
+    border:2px solid rgba(11,42,74,0.3);
+    border-radius: 10px;
+    padding: 7px;
+    font-family: inherit;
+    color: #35384d;
+    font-size: 15px;
+    appearance: none;
+    transition: all 0.2s ease-out;
+    box-sizing: border-box;
+    background: url('arrow.jpg') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+input{
+  width:600px;
+  height:40px;
+  border:2px solid rgba(11,42,74,0.3);
+  border-radius: 10px;
+  font-family: inherit;
+  border-radius: 10px;
+  transition: all 0.2s ease-out;
+  min-width: 10px;
+  min-height: 30px;
+  font-size: 15px;
+  background: transparent;
+  margin-right: 0px;
+}
+.srchBox .btn_srch {
+  position: absolute;
+  width:50px;
+  height:40px;
+  right:0px;
+  margin : 0px;
+  font-family: inherit;
+  transition: all 0.2s ease-out;
+  color: #fff;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  background: #5e77ff;
+  cursor: pointer;
+}
+.srchBox .btn_srch:focus {
+  text-decoration: underline;
+  background: rgba(11,42,74,0.8);
+  transition: all 0.3s ease-out;
+}
+.rating_srch{
+    display: inline-block;
+    margin: 20px;
+    width: 200px;
+    height:40px;
+    margin-left:0px;
+    border:2px solid rgba(11,42,74,0.3);
+    border-radius: 10px;
+    padding: 7px;
+    font-family: inherit;
+    color: #35384d;
+    font-size: 15px;
+    appearance: none;
+    transition: all 0.2s ease-out;
+    box-sizing: border-box;
+}
+.review_srch{
+  display: inline-block;
+  margin: 20px;
+  width: 200px;
+  margin-top:0px;
+  margin-left:0px;
+  height:40px;
+  border:2px solid rgba(11,42,74,0.3);
+  border-radius: 10px;
+  padding: 7px;
+  font-family: inherit;
+  color: #35384d;
+  font-size: 15px;
+  appearance: none;
+  transition: all 0.2s ease-out;
+  box-sizing: border-box;
+}
+.box_recommended li {
+  width: 230px;
+  height: 400px;
+  margin: 7px;
+  background-color: #ff4;
+  /* list 앞에 점마크 지우기*/
+  list-style: none;
+  /* list 띄워서 가로 정렬 */
+  float: left;
+}
+.bestseller {
+  margin: 20px
+}
+/* 띄운 li요소 가라앉히려고 가상요소투입*/
+.box_recommended ul::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+.box_recommended{
+  /* 화면크기보다 크게 줘봤돠 */
+  width: 1000%;
+}
+.book_content img {
+  float: left;
+  margin: 20px;
+}
+.info_group dt {
+  float: left;
+  padding-right: 10px;
+  letter-spacing: -0.3px;
+  color: gray;
+}
+/*슬라이드*/
+.mySlides {display: none}
+img {vertical-align: middle;}
+/* Slideshow container */
+.slideshow-container {
+max-width: 1070px;
+position: relative;
+}
+/* Next & previous buttons */
+.prev, .next {
+cursor: pointer;
+position: absolute;
+top: 50%;
+width: auto;
+padding: 16px;
+margin-top: -22px;
+font-weight: bold;
+font-size: 18px;
+transition: 0.6s ease;
+border-radius: 0 3px 3px 0;
+user-select: none;
+}
+/* Position the "next button" to the right */
+.next {
+right: 0;
+border-radius: 3px 0 0 3px;
+}
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+background-color: rgba(0,0,0,0.8);
+}
+/* Fading animation */
+.fade {
+-webkit-animation-name: fade;
+-webkit-animation-duration: 1.5s;
+animation-name: fade;
+animation-duration: 1.5s;
+}
+@-webkit-keyframes fade {
+from {opacity: .4}
+to {opacity: 1}
+}
+@keyframes fade {
+from {opacity: .4}
+to {opacity: 1}
+}

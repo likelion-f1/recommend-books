@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>책 검색</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}">
+    <link rel="stylesheet" href="./search.css">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.14.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h3> 검색 책 결과</h3>
+</header>
+
+<div class="book_content">
+
+    <!-- *** s:form - proForm *** -->
+    <form name="proForm" method="post">
+        <div class="box_detail_point">
+            <div class="box_detail_point_img">
+                <a href='http://www.kyobobook.co.kr/product/detailViewKor.laf?barcode={{book.barcode}}'>
+                <img src="{{book.image}}" onerror="javascript:noImage(this,'L','KOR');" alt="{{book.title}}">
+                </a>
+                <!--                <img src="https://an2-img.amz.wtchn.net/image/v2/5f4b88568f2d7b277842c92367fadcd2.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKaVlXTnJaM0p2ZFc1a0lqcDdJbklpT2pJMU5Td2laeUk2TWpVMUxDSmlJam95TlRWOUxDSmpjbTl3SWpwMGNuVmxMQ0pvWldsbmFIUWlPalF3TUN3aWNHRjBhQ0k2SWk5Mk1pOXpkRzl5WlM5cGJXRm5aUzh4TmpFM05qRXhNRGczTlRNNE56RXdOekUxSWl3aWNYVmhiR2wwZVNJNk9EQXNJbmRwWkhSb0lqb3lPREI5Lk1fM0o3ZnpKbGhhdmQ4S3ozS1ZmUWJ6TFAxS0hiaEZ3cmJXUEtWMWdYNGc"/>-->
+            </div>
+            <div class="box_detail">
+                <div class='box_detail_point_title'>
+                    <h1 class="title">
+                        <strong>{{book.title}}</strong>
+                        <!--                <span class="back">-->
+                        <!--							<strong>-->
+                        <!--								욕망하는 사랑, 희생하는 사랑-->
+                        <!--								<span class="line">|</span>-->
+                        <!--								뉴질랜드 호주 캠핑카 여행-->
+                        <!--							</strong>-->
+                        <!--						</span>-->
+                    </h1>
+                </div>
+
+
+                <dl class="info">
+                    <div class="info_detail">
+                        <div class="info_group">
+                            <dt><span class="cm_bar"></span>저자 : </dt>
+                            <dd>{{book.author}}</dd>
+                            <section></section>
+                        </div>
+
+                        {% if book.publisher != '' %}
+                        <div class="info_group">
+                            <dt><span class="cm_bar"></span>출판사 : </dt>
+                            <dd>{{book.publisher}}</dd>
+                            <section></section>
+                        </div>
+
+                        {% endif %}
+                        <div class="info_group">
+                            <dt><span class="cm_bar"></span>출간 : </dt>
+                            <dd>{{book.date}}</dd>
+                            <section></section>
+                        </div>
+                            {% if book.price != '' %}
+
+                            <div class="info_group">
+                                <dt><span class="cm_bar"></span>가격 : </dt>
+                                <dd>{{book.price}}</dd>
+                                <section></section>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="info_detail">
+                            <div class="info_group">
+                                <dt><span class="cm_bar"></span>별점 : </dt>
+                                <div class="rating_detail">
+                                    <i class="fas fa-star"></i>
+                                    <dd> {{book.rating}} (리뷰 {{book.review}} 개)</dd>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="bestseller">
+                            {% for year in book.year %}
+                            <div><span>
+                    국내도서 {{year}}년 베스트 {{book.rank.iloc[loop.index - 1]}}위
+    			</span></div>
+                            {% endfor %}
+                        </div>
+                </dl>
+            </div>
+        </div>
+
+        {% if book.keywords|length > 0 %}
+        <div class="box_keyword" style="margin-top:50px">
+            <div class="book_keyword_pick">
+                <i class="fas fa-check-square fa-2x"></i>
+                <h2>키워드 Pick</h2>
+
+            </div>
+
+            <div class="btn_more popup_load">
+                <div id="layerKeywordpick"
+                     style="display:none; position: absolute; left: -158px; top: 30px; z-index: 300;">
+                    <div class="layer_popup" style="width:302px;">
+                        <p style="position:absolute;left:163px;top:-6px"><img
+                                src="https://simage.kyobobook.co.kr/ink/images/common/icon_arrow_top.png" alt=""></p>
+
+                        <p class="new_btn"><a href="javascript:popOpen('layerKeywordpick');"><img
+                                src="https://simage.kyobobook.co.kr/ink/images/common/btn_close_p.gif" alt="닫기"></a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="book_keyword">
+                {% for keyword in book.keywords %}
+<!--                <a href="#" onclick="javascript:rb_detail_keyword_click('가족', '9791165396916'); popupOpenKey('가족', 'JA3'); return false;">keyword</a>-->
+                    <a>{{keyword}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </form>
+    <!------------------------------>
+
+    {% if recommended_books|length > 0 %}
+    <div class="box_recommended">
+        <h2 class="recommended">당신을 위한 Pick</h2>
+        <div class="slideshow-container">
+            <ul class="list_detail_relation">
+                {% for r_book in recommended_books %}
+                <li class="mySlides fade">
+                    <div class="cover"><a
+                            href="/search?barcode={{r_book.barcode}}">
+                        <img src="{{r_book.image}}"
+                             alt="{{r_book.title}}">
+                    </a></div>
+                    <div class="title"><a
+                            href="/search?barcode={{r_book.barcode}}">
+                        <strong>{{r_book.title}}</strong>
+                    </a></div>
+                    {% if r_book.price != '' %}
+                    <div class="price"><strong>{{r_book.price}}</strong>원</div>
+                    {% elif r_book.author != ''%}
+                    <div class="price">저자: <strong>{{r_book.author}}</strong></div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var unit = 5;
+    var slides = document.getElementsByClassName("mySlides");
+    <!--  var dots = document.getElementsByClassName("dot");-->
+    var last = Math.ceil(slides.length/unit) - 1;
+    console.log('ast ' + last);
+    console.log('n ' + n);
+    if (n > last) {slideIndex = 0}
+    if (n < 0) {slideIndex = last}
+    n = slideIndex;
+    for (i = 0; i < slides.length; i++) {
+        if (i >= unit*n && i < unit*(n+1)) {
+            slides[i].style.display = "block";
+        } else {
+            slides[i].style.display = "none";
+        }
+    }
+<!--  for (i = 0; i < dots.length; i++) {-->
+<!--      dots[i].className = dots[i].className.replace(" active", "");-->
+<!--  }-->
+<!--  slides[slideIndex-1].style.display = "block";-->
+<!--  dots[slideIndex-1].className += " active";-->
+}
+
+
+
+
+</script>
+
+</body>
+</html>
